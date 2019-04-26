@@ -1,16 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using TeduShop.Model.Abstract;
 
 namespace TeduShop.Model.Models
 {
-    [Table("ProductCategories")]
-    public class ProductCategory : Auditable
+    [Table("PostCategories")]
+    public class PostCategory : Auditable
     {
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)] // tự động tăng ID
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int ID { get; set; }
 
         [Required]
@@ -18,11 +21,13 @@ namespace TeduShop.Model.Models
         public string Name { get; set; }
 
         [Required]
-        [Column(TypeName = "varchar")]
         [MaxLength(250)]
+        [Column(TypeName = "varchar")]
         public string Alias { get; set; }
 
-        public int? ParentID { get; set; }
+        public int ParentID { get; set; }
+
+        public int? DisplayOrder { get; set; }
 
         [MaxLength(500)]
         public string Image { get; set; }
@@ -30,10 +35,8 @@ namespace TeduShop.Model.Models
         [MaxLength(500)]
         public string Description { get; set; }
 
-        public int? DisplayOrder { get; set; }
-
         public bool? HomeFlag { get; set; }
 
-        public virtual IEnumerable<Product> Products { get; set; }
+        public virtual IEnumerable<Post> Posts { get; set; }
     }
 }

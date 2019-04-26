@@ -7,6 +7,9 @@ namespace TeduShop.Model.Models
     public class Footer
     {
         [Key]
+        [Required]
+        [Column(TypeName = "varchar")]
+        [MaxLength(50)]
         public string ID { get; set; }
 
         [Required]

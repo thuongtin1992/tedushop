@@ -16,13 +16,16 @@ namespace TeduShop.Model.Models
         public int ID { get; set; }
 
         [Required]
+        [MaxLength(250)]
         public string Name { get; set; }
 
         [Required]
+        [MaxLength(500)]
         public string URL { get; set; }
 
         public int? DisplayOrder { get; set; }
 
+        [MaxLength(20)]
         public string Target { get; set; }
 
         [Required]

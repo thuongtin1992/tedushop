@@ -21,7 +21,9 @@ namespace TeduShop.Model.Models
         public string Alias { get; set; }
         public int CategoryID { get; set; }
         public string Image { get; set; }
-        public XElement MoreImage { get; set; }
+
+        [Column(TypeName = "xml")]
+        public string MoreImage { get; set; }
 
         [Required]
         public decimal Price { get; set; }
