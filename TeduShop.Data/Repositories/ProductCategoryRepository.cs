@@ -2,10 +2,11 @@
 using TeduShop.Model.Models;
 using System.Collections.Generic;
 using System.Linq;
+using System;
 
 namespace TeduShop.Data.Repositories
 {
-    public interface IProductCategoryRepository
+    public interface IProductCategoryRepository : IRepository<ProductCategory>
     {
         IEnumerable<ProductCategory> GetByAlias(string alias);
     }
