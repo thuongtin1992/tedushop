@@ -18,6 +18,16 @@
             <h3 class="box-title">Danh mục sản phẩm</h3>
         </div>
         <div class="box-body">
+            <div class="row" style="margin-bottom: 10px;">
+                <div class="col-md-6">
+                    <div class="input-group">
+                        <input class="form-control" type="text" ng-model="keyword" placeholder="Nhập từ khóa..." />
+                        <span class="input-group-btn">
+                            <button class="btn btn-primary" type="button" ng-click="search()">Tìm kiếm</button>
+                        </span>
+                    </div>
+                </div>
+            </div>
             <div class="row">
                 <div class="col-md-12">
                     <table class="table table-bordered">
@@ -41,6 +51,11 @@
                                 <button class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></button>
                             </td>
                         </tr>
+                        <tfoot>
+                            <tr>
+                                <td colspan="5">Tổng số bản ghi: {{totalCount}}</td>
+                            </tr>
+                        </tfoot>
                     </table>
                 </div>
             </div>
