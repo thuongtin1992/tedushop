@@ -28,9 +28,9 @@
                 if (result.data.TotalCount == 0) {
                     notificationService.displayWarning('Không tìm thấy bản ghi nào phù hợp.');
                 }
-                else {
-                    notificationService.displayInfo('Đã tìm thấy ' + result.data.TotalCount + ' bản ghi.');
-                }
+                //else {
+                //    notificationService.displayInfo('Đã tìm thấy ' + result.data.TotalCount + ' bản ghi.');
+                //}
                 $scope.productCategories = result.data.Items;
                 $scope.page = result.data.Page;
                 $scope.pagesCount = result.data.TotalPages;

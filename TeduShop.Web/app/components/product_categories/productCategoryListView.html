@@ -2,7 +2,6 @@
 <section class="content-header">
     <h1>
         Danh mục sản phẩm
-        <small>đây là danh mục sản phẩm</small>
     </h1>
     <ol class="breadcrumb">
         <li><a ui-sref="admin"><i class="fa fa-dashboard"></i> Dashboard</a></li>
@@ -15,7 +14,7 @@
     <!-- Default box -->
     <div class="box">
         <div class="box-header with-border">
-            <h3 class="box-title">Danh mục sản phẩm</h3>
+            <h3 class="box-title">Danh mục</h3>
         </div>
         <div class="box-body">
             <div class="row" style="margin-bottom: 10px;">
@@ -23,9 +22,12 @@
                     <div class="input-group">
                         <input class="form-control" type="text" ng-model="keyword" placeholder="Nhập từ khóa..." />
                         <span class="input-group-btn">
-                            <button class="btn btn-primary" type="button" ng-click="search()">Tìm kiếm</button>
+                            <button class="btn btn-primary" type="button" ng-click="search()"><i class="fa fa-search" style="font-size: 16px;"></i></button>
                         </span>
                     </div>
+                </div>
+                <div class="col-md-6">
+                    <button class="btn btn-success" ui-sref="add_product_category">Thêm mới</button>
                 </div>
             </div>
             <div class="row">
