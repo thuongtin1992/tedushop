@@ -19,7 +19,7 @@
                     notificationService.displaySuccess('Bản ghi ' + result.data.Name + ' đã được tạo.');
                     $state.go('product_categories');
                 }, function (error) {
-                    notificationService.displayWarning('Tạo mới không thành công.');
+                    notificationService.displayWarning('Tạo mới không thành công. Vui lòng kiểm tra lại.');
                 });
         }
 
@@ -27,7 +27,7 @@
             apiService.get('api/productcategory/getallparents', null, function (result) {
                 $scope.parentCategories = result.data;
             }, function () {
-                notificationService.displayError('Lỗi: Không thể tải được dữ liệu.');
+                console.log('Lỗi: Không thể tải được dữ liệu dropdownlist.');
             });
         }
 

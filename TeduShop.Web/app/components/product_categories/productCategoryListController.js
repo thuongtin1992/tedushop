@@ -21,7 +21,7 @@
                 params: {
                     keyword: $scope.keyword,
                     page: page,
-                    pageSize: 10
+                    pageSize: 5
                 }
             }
             apiService.get('/api/productcategory/getall', config, function (result) {

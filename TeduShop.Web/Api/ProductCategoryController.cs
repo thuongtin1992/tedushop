@@ -16,10 +16,25 @@ namespace TeduShop.Web.Api
     [RoutePrefix("api/productcategory")]
     public class ProductCategoryController : ApiControllerBase
     {
+        #region khởi tạo
         IProductCategoryService _productCategoryService;
         public ProductCategoryController(IErrorService errorService, IProductCategoryService productCategorySerivce) : base(errorService)
         {
             this._productCategoryService = productCategorySerivce;
+        }
+        #endregion
+
+        [Route("getbyid/{id:int}")]
+        [HttpGet]
+        public HttpResponseMessage GetById(HttpRequestMessage request, int id)
+        {
+            return CreateHttpResponse(request, () =>
+            {
+                var model = _productCategoryService.GetById(id);
+                var responseData = Mapper.Map<ProductCategory, ProductCategoryViewModel>(model);
+                var response = request.CreateResponse(HttpStatusCode.OK, responseData);
+                return response;
+            });
         }
 
         [Route("getall")]
@@ -45,6 +60,14 @@ namespace TeduShop.Web.Api
                     TotalCount = totalRow,
                     TotalPages = (int)Math.Ceiling((decimal)totalRow / pageSize)
                 };
+
+                int stt = page * pageSize;
+
+                foreach (var item in responseData)
+                {
+                    item.Index += stt + 1;
+                    stt++;
+                }
 
                 var response = request.CreateResponse(HttpStatusCode.OK, paginationSet);
                 return response;
@@ -75,9 +98,10 @@ namespace TeduShop.Web.Api
                 if (ModelState.IsValid)
                 {
                     var newProductCategory = new ProductCategory();
+
                     newProductCategory.UpdateProductCategory(productCategoryViewModel);
-                    newProductCategory.CreatedBy = "admin";
                     newProductCategory.CreatedDate = DateTime.Now;
+
                     _productCategoryService.Add(newProductCategory);
                     _productCategoryService.Save();
 
@@ -88,6 +112,36 @@ namespace TeduShop.Web.Api
                 {
                     response = request.CreateResponse(HttpStatusCode.BadRequest, ModelState);
                 }
+                return response;
+            });
+        }
+
+        [Route("update")]
+        [HttpPut]
+        [AllowAnonymous]
+        public HttpResponseMessage Update(HttpRequestMessage request, ProductCategoryViewModel productCategoryViewModel)
+        {
+            return CreateHttpResponse(request, () =>
+            {
+                HttpResponseMessage response = null;
+                if (ModelState.IsValid)
+                {
+                    var dbProductCategory = _productCategoryService.GetById(productCategoryViewModel.ID);
+
+                    dbProductCategory.UpdateProductCategory(productCategoryViewModel);
+                    dbProductCategory.UpdatedDate = DateTime.Now;
+
+                    _productCategoryService.Update(dbProductCategory);
+                    _productCategoryService.Save();
+
+                    var responseData = Mapper.Map<ProductCategory, ProductCategoryViewModel>(dbProductCategory);
+                    response = request.CreateResponse(HttpStatusCode.Created, responseData);
+                }
+                else
+                {
+                    response = request.CreateResponse(HttpStatusCode.BadRequest, ModelState);
+                }
+
                 return response;
             });
         }

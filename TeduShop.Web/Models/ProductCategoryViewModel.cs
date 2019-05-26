@@ -10,6 +10,8 @@ namespace TeduShop.Web.Models
     {
         public int ID { get; set; }
 
+        public int Index { get; set; }
+
         [Required]
         public string Name { get; set; }
 
