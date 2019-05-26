@@ -145,5 +145,29 @@ namespace TeduShop.Web.Api
                 return response;
             });
         }
+
+        [Route("delete")]
+        [HttpDelete]
+        [AllowAnonymous]
+        public HttpResponseMessage Delete(HttpRequestMessage request, int id)
+        {
+            return CreateHttpResponse(request, () =>
+            {
+                HttpResponseMessage response = null;
+                if (ModelState.IsValid)
+                {
+                    var oldProductCategory = _productCategoryService.Delete(id);
+                    _productCategoryService.Save();
+
+                    var responseData = Mapper.Map<ProductCategory, ProductCategoryViewModel>(oldProductCategory);
+                    response = request.CreateResponse(HttpStatusCode.Created, responseData);
+                }
+                else
+                {
+                    response = request.CreateResponse(HttpStatusCode.BadRequest, ModelState);
+                }
+                return response;
+            });
+        }
     }
 }
