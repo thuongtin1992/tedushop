@@ -10,6 +10,7 @@ using TeduShop.Service;
 using TeduShop.Web.Infrastructure.Core;
 using TeduShop.Web.Infrastructure.Extensions;
 using TeduShop.Web.Models;
+using System.Web.Script.Serialization;
 
 namespace TeduShop.Web.Api
 {
@@ -135,7 +136,7 @@ namespace TeduShop.Web.Api
                     _productCategoryService.Save();
 
                     var responseData = Mapper.Map<ProductCategory, ProductCategoryViewModel>(dbProductCategory);
-                    response = request.CreateResponse(HttpStatusCode.Created, responseData);
+                    response = request.CreateResponse(HttpStatusCode.OK, responseData);
                 }
                 else
                 {
@@ -160,7 +161,36 @@ namespace TeduShop.Web.Api
                     _productCategoryService.Save();
 
                     var responseData = Mapper.Map<ProductCategory, ProductCategoryViewModel>(oldProductCategory);
-                    response = request.CreateResponse(HttpStatusCode.Created, responseData);
+                    response = request.CreateResponse(HttpStatusCode.OK, responseData);
+                }
+                else
+                {
+                    response = request.CreateResponse(HttpStatusCode.BadRequest, ModelState);
+                }
+                return response;
+            });
+        }
+
+        [Route("deletemulti")] // xóa nhiều bản ghi
+        [HttpDelete]
+        [AllowAnonymous]
+        public HttpResponseMessage DeleteMulti(HttpRequestMessage request, string checkedProductCategories)
+        {
+            return CreateHttpResponse(request, () =>
+            {
+                HttpResponseMessage response = null;
+                if (ModelState.IsValid)
+                {
+                    var listProductCategory = new JavaScriptSerializer().Deserialize<List<int>>(checkedProductCategories);
+
+                    foreach (var item in listProductCategory)
+                    {
+                        _productCategoryService.Delete(item);
+                    }
+
+                    _productCategoryService.Save();
+
+                    response = request.CreateResponse(HttpStatusCode.OK, listProductCategory.Count());
                 }
                 else
                 {
