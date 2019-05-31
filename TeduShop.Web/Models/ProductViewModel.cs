@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
@@ -9,10 +10,15 @@ namespace TeduShop.Web.Models
     {
         public int ID { set; get; }
 
+        public int Index { get; set; }
+
+        [Required]
         public string Name { set; get; }
 
+        [Required]
         public string Alias { set; get; }
 
+        [Required]
         public int CategoryID { set; get; }
 
         public string Image { set; get; }
@@ -47,6 +53,7 @@ namespace TeduShop.Web.Models
 
         public string MetaDescription { set; get; }
 
+        [Required]
         public bool Status { set; get; }
 
         public virtual ProductCategoryViewModel ProductCategory { set; get; }
