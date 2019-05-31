@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 namespace TeduShop.Web.Models
 {
@@ -33,6 +34,7 @@ namespace TeduShop.Web.Models
 
         public string Description { set; get; }
 
+        [AllowHtml]
         public string Content { set; get; }
 
         public bool? HomeFlag { set; get; }
@@ -55,6 +57,8 @@ namespace TeduShop.Web.Models
 
         [Required]
         public bool Status { set; get; }
+
+        public string Tags { set; get; }
 
         public virtual ProductCategoryViewModel ProductCategory { set; get; }
     }

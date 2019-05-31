@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using TeduShop.Model.Models;
+﻿using TeduShop.Model.Models;
 using TeduShop.Web.Models;
 
 namespace TeduShop.Web.Infrastructure.Extensions
@@ -84,7 +80,7 @@ namespace TeduShop.Web.Infrastructure.Extensions
             product.Warranty = productViewModel.Warranty;
             product.HomeFlag = productViewModel.HomeFlag;
             product.ViewCount = productViewModel.ViewCount;
-
+            product.HotFlag = productViewModel.HotFlag;
             product.CreatedDate = productViewModel.CreatedDate;
             product.CreatedBy = productViewModel.CreatedBy;
             product.UpdatedDate = productViewModel.UpdatedDate;
@@ -92,6 +88,7 @@ namespace TeduShop.Web.Infrastructure.Extensions
             product.MetaKeyword = productViewModel.MetaKeyword;
             product.MetaDescription = productViewModel.MetaDescription;
             product.Status = productViewModel.Status;
+            product.Tags = productViewModel.Tags;
         }
     }
 }
