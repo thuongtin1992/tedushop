@@ -21,12 +21,12 @@ namespace TeduShop.Model.Models
         public string Image { get; set; }
 
         [Column(TypeName = "xml")]
-        public string MoreImage { get; set; }
+        public string MoreImages { get; set; }
 
         [Required]
         public decimal Price { get; set; }
 
-        public decimal? Promotion { get; set; }
+        public decimal? PromotionPrice { get; set; }
         public int? Warranty { get; set; }
         public string Description { get; set; }
         public string Content { get; set; }

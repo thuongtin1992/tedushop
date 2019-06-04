@@ -74,9 +74,9 @@ namespace TeduShop.Web.Infrastructure.Extensions
             product.CategoryID = productViewModel.CategoryID;
             product.Content = productViewModel.Content;
             product.Image = productViewModel.Image;
-            product.MoreImage = productViewModel.MoreImages;
+            product.MoreImages = productViewModel.MoreImages;
             product.Price = productViewModel.Price;
-            product.Promotion = productViewModel.PromotionPrice;
+            product.PromotionPrice = productViewModel.PromotionPrice;
             product.Warranty = productViewModel.Warranty;
             product.HomeFlag = productViewModel.HomeFlag;
             product.ViewCount = productViewModel.ViewCount;
