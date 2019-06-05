@@ -15,6 +15,7 @@ using System.Web.Script.Serialization;
 namespace TeduShop.Web.Api
 {
     [RoutePrefix("api/productcategory")]
+    [Authorize]
     public class ProductCategoryController : ApiControllerBase
     {
         #region khởi tạo
@@ -102,6 +103,7 @@ namespace TeduShop.Web.Api
 
                     newProductCategory.UpdateProductCategory(productCategoryViewModel);
                     newProductCategory.CreatedDate = DateTime.Now;
+                    newProductCategory.CreatedBy = User.Identity.Name;
 
                     _productCategoryService.Add(newProductCategory);
                     _productCategoryService.Save();
@@ -131,6 +133,7 @@ namespace TeduShop.Web.Api
 
                     dbProductCategory.UpdateProductCategory(productCategoryViewModel);
                     dbProductCategory.UpdatedDate = DateTime.Now;
+                    dbProductCategory.UpdatedBy = User.Identity.Name;
 
                     _productCategoryService.Update(dbProductCategory);
                     _productCategoryService.Save();

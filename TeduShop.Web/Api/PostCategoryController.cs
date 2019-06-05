@@ -8,10 +8,12 @@ using TeduShop.Model.Models;
 using AutoMapper;
 using TeduShop.Web.Models;
 using TeduShop.Web.Infrastructure.Extensions;
+using System;
 
 namespace TeduShop.Web.Api
 {
     [RoutePrefix("api/postcategory")]
+    [Authorize]
     public class PostCategoryController : ApiControllerBase
     {
         IPostCategoryService _postCategoryService;  
@@ -48,6 +50,8 @@ namespace TeduShop.Web.Api
                 {
                     PostCategory newPostCategory = new PostCategory();
                     newPostCategory.UpdatePostCategory(postCategoryVM);
+                    newPostCategory.CreatedBy = User.Identity.Name;
+                    newPostCategory.CreatedDate = DateTime.Now;
 
                     var category = _postCategoryService.Add(newPostCategory);
                     _postCategoryService.Save();
@@ -72,6 +76,8 @@ namespace TeduShop.Web.Api
                 {
                     var postCategoryDb = _postCategoryService.GetById(postCategoryVM.ID);
                     postCategoryDb.UpdatePostCategory(postCategoryVM);
+                    postCategoryDb.UpdatedBy = User.Identity.Name;
+                    postCategoryDb.UpdatedDate = DateTime.Now;
 
                     _postCategoryService.Update(postCategoryDb);
                     _postCategoryService.Save();
