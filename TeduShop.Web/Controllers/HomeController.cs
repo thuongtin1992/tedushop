@@ -13,18 +13,22 @@ namespace TeduShop.Web.Controllers
             return View();
         }
 
-        public ActionResult About()
+        [ChildActionOnly]
+        public ActionResult _Header()
         {
-            ViewBag.Message = "Your application description page.";
-
-            return View();
+            return PartialView();
         }
 
-        public ActionResult Contact()
+        [ChildActionOnly]
+        public ActionResult _Footer()
         {
-            ViewBag.Message = "Your contact page.";
+            return PartialView();
+        }
 
-            return View();
+        [ChildActionOnly]
+        public ActionResult _Category()
+        {
+            return PartialView();
         }
     }
 }
