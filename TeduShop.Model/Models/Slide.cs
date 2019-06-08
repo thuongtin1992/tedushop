@@ -17,6 +17,8 @@ namespace TeduShop.Model.Models
         [MaxLength(250)]
         public string Description { set; get; }
 
+        public string Content { set; get; }
+
         [MaxLength(500)]
         public string Image { set; get; }
 
