@@ -2,10 +2,10 @@
 @model IEnumerable<ProductCategoryViewModel>
 
 <div class="sub-cate">
-    <div class=" top-nav rsidebar span_1_of_left">
+    <div class="top-nav rsidebar span_1_of_left">
         <h3 class="cate">DANH MỤC</h3>
         <ul class="menu">
-            @foreach (var category in Model)
+            @foreach (var category in Model.Where(m => m.ParentID == 0))
             {
                 var url = "/" + category.Alias + ".pc-" + category.ID + ".html";
                 var childCategories = Model.Where(m => m.ParentID == category.ID);

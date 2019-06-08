@@ -1,21 +1,20 @@
 ﻿using System;
-using System.Globalization;
+using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using TeduShop.Web.Models;
 
 namespace TeduShop.Web.Controllers
 {
-    
-    public class AccountController : Controller
+    public class ProductController : Controller
     {
-        public ActionResult Login()
+        // GET: Product
+        public ActionResult Detail(int id)
         {
             return View();
         }
 
-        public ActionResult Register()
+        public ActionResult Category(int id)
         {
             return View();
         }

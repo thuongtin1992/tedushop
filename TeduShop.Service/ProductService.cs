@@ -129,12 +129,12 @@ namespace TeduShop.Service
 
         public IEnumerable<Product> GetLatest(int top)
         {
-            return _productRepository.GetMulti(m => m.Status == true).OrderByDescending(m => m.CreatedDate).Take(top);
+            return _productRepository.GetMulti(m => m.Status == true && m.HomeFlag == true).OrderByDescending(m => m.CreatedDate).Take(top);
         }
 
         public IEnumerable<Product> GetHotProduct(int top)
         {
-            return _productRepository.GetMulti(m => m.Status == true && m.HotFlag == true).OrderByDescending(m => m.CreatedDate).Take(top);
+            return _productRepository.GetMulti(m => m.Status == true && m.HomeFlag == true && m.HotFlag == true).OrderByDescending(m => m.CreatedDate).Take(top);
         }
     }
 }

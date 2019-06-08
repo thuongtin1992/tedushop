@@ -57,7 +57,7 @@ namespace TeduShop.Web.Controllers
         [ChildActionOnly]
         public ActionResult _Category()
         {
-            var model = _productCategoryService.GetAll();
+            var model = _productCategoryService.GetAll().Where(m => m.Status == true && m.HomeFlag == true).OrderBy(m => m.DisplayOrder).ThenByDescending(m => m.CreatedDate);
             var listProductCategoryViewModel = Mapper.Map<IEnumerable<ProductCategory>, IEnumerable<ProductCategoryViewModel>>(model);
             return PartialView(listProductCategoryViewModel);
         }
