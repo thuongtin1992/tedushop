@@ -6,50 +6,44 @@
 }
 
 <div class="shoes-grid">
-    <a href="single.html">
-        <div class="wrap-in">
-            <div class="wmuSlider example1 slide-grid">
-                <div class="wmuSliderWrapper">
-                    @foreach (var slide in Model.Slides)
+    <div class="wrap-in">
+        <div class="wmuSlider example1 slide-grid">
+            <div class="wmuSliderWrapper">
+                @foreach (var slide in Model.Slides)
                     {
-                        <article style="position: absolute; width: 100%; opacity: 0;">
-                            <div class="banner-matter">
-                                <div class="col-md-5 banner-bag">
-                                    <img class="img-responsive " src="@slide.Image" alt="@slide.Name" />
-                                </div>
-                                <div class="col-md-7 banner-off">
-                                    @Html.Raw(slide.Content)
-                                </div>
-                                <div class="clearfix"> </div>
+                    <article style="position: absolute; width: 100%; opacity: 0;">
+                        <div class="banner-matter">
+                            <div class="col-md-5 banner-bag">
+                                <img class="img-responsive " src="@slide.Image" alt="@slide.Name" />
                             </div>
-                        </article>
+                            <div class="col-md-7 banner-off">
+                                @Html.Raw(slide.Content)
+                            </div>
+                            <div class="clearfix"> </div>
+                        </div>
+                    </article>
                     }
-                </div>
-    </a>
-    <ul class="wmuSliderPagination">
-        @for (int i = 0; i < Model.Slides.Count(); i++)
+            </div>
+            <ul class="wmuSliderPagination">
+                @for (int i = 0; i < Model.Slides.Count(); i++)
         {
-            <li><a href="#" class="">@i</a></li>
+                    <li><a href="#" class="">@i</a></li>
         }
-    </ul>
-</div>
+            </ul>
+        </div>
+    </div>
 
-@section homeProducts{
     <div class="shoes-grid-left">
         <a href="single.html">
             <div class="col-md-6 con-sed-grid">
-
                 <div class=" elit-grid">
-
                     <h4>consectetur  elit</h4>
                     <label>FOR ALL PURCHASE VALUE</label>
                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, </p>
                     <span class="on-get">GET NOW</span>
                 </div>
                 <img class="img-responsive shoe-left" src="/Assets/client/images/sh.jpg" alt="" />
-
                 <div class="clearfix"> </div>
-
             </div>
         </a>
         <a href="single.html">
@@ -66,10 +60,12 @@
             </div>
         </a>
     </div>
+
     <div class="products">
         <h5 class="latest-product">SẢN PHẨM MỚI NHẤT</h5>
         <a class="view-all" href="san-pham.html">XEM TẤT CẢ<span> </span></a>
     </div>
+
     <div class="product-left">
         @foreach (var product in Model.LatestProducts)
         {
@@ -156,8 +152,7 @@
         }
         <div class="clearfix"> </div>
     </div>
-}
-
+</div>
 @section footerJs{
     <script src="/Assets/client/js/jquery.wmuSlider.js"></script>
     <script>

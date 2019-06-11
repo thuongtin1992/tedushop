@@ -31,9 +31,16 @@ namespace TeduShop.Web
             );
 
             routes.MapRoute(
+                name: "Search Product",
+                url: "tim-kiem.html",
+                defaults: new { controller = "Product", action = "Search" },
+                namespaces: new string[] { "TeduShop.Web.Controllers" }
+            );
+
+            routes.MapRoute(
                 name: "Product Category",
                 url: "{alias}.pc-{id}.html",
-                defaults: new { controller = "Product", action = "_Category", id = UrlParameter.Optional },
+                defaults: new { controller = "Product", action = "Category", id = UrlParameter.Optional },
                 namespaces: new string[] { "TeduShop.Web.Controllers" }
             );
 
