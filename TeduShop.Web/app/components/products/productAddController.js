@@ -7,7 +7,8 @@
         $scope.product = {
             Status: true,
             Price: 0,
-            Warranty: 12
+            Warranty: 12,
+            Quantity: 0
         }
 
         $scope.ckeditorOptions = {

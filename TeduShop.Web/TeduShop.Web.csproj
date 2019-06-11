@@ -6460,6 +6460,50 @@
     <Content Include="Scripts\plugins\angular\index.js" />
     <Content Include="Scripts\spa\app.js" />
     <Content Include="Scripts\spa\teduShopDirective.html" />
+    <Content Include="UploadedFiles\images\10036553_TIVI_PANASONIC_49_INCH_TH_49FX700V_1.jpg" />
+    <Content Include="UploadedFiles\images\404-page-not-found.png" />
+    <Content Include="UploadedFiles\images\aqua-aqw-s80at-300x300.png" />
+    <Content Include="UploadedFiles\images\may-giat-aqua-aqw-s80at-2.jpg" />
+    <Content Include="UploadedFiles\images\may-giat-aqua-aqw-s80at-3.jpg" />
+    <Content Include="UploadedFiles\images\may-giat-aqua-aqw-s80at-4.jpg" />
+    <Content Include="UploadedFiles\images\may-giat-aqua-aqw-s80at-5.jpg" />
+    <Content Include="UploadedFiles\images\may-giat-aqua-aqw-s80at-6.jpg" />
+    <Content Include="UploadedFiles\images\no-image-product.png" />
+    <Content Include="UploadedFiles\images\samsung-galaxy-a50-black-1-400x460.png" />
+    <Content Include="UploadedFiles\images\samsung-ua55nu7400-1-.jpg" />
+    <Content Include="UploadedFiles\images\samsung-ua55nu7400-2.jpg" />
+    <Content Include="UploadedFiles\images\samsung-ua55nu7400-5.jpg" />
+    <Content Include="UploadedFiles\images\tivi-lg-49uk7500pta-1-2.jpg" />
+    <Content Include="UploadedFiles\images\tivi-lg-49uk7500pta-25-550x340.jpg" />
+    <Content Include="UploadedFiles\images\tivi-lg-49uk7500pta-3-2.jpg" />
+    <Content Include="UploadedFiles\images\tivi-lg-49uk7500pta-5-2.jpg" />
+    <Content Include="UploadedFiles\images\tivi-samsung-ua55nu7400-3-550x340.jpg" />
+    <Content Include="UploadedFiles\images\tu-lanh-toshiba-gr-a28vm-ukg-10-300x300.jpg" />
+    <Content Include="UploadedFiles\images\vi-vn-toshiba-gr-a28vm-ukg-5.jpg" />
+    <Content Include="UploadedFiles\images\vi-vn-toshiba-gr-a28vm-ukg-6.jpg" />
+    <Content Include="UploadedFiles\images\vi-vn-toshiba-gr-a28vm-ukg-7.jpg" />
+    <Content Include="UploadedFiles\_thumbs\Images\10036553_TIVI_PANASONIC_49_INCH_TH_49FX700V_1.jpg" />
+    <Content Include="UploadedFiles\_thumbs\Images\404-page-not-found.png" />
+    <Content Include="UploadedFiles\_thumbs\Images\aqua-aqw-s80at-300x300.png" />
+    <Content Include="UploadedFiles\_thumbs\Images\may-giat-aqua-aqw-s80at-2.jpg" />
+    <Content Include="UploadedFiles\_thumbs\Images\may-giat-aqua-aqw-s80at-3.jpg" />
+    <Content Include="UploadedFiles\_thumbs\Images\may-giat-aqua-aqw-s80at-4.jpg" />
+    <Content Include="UploadedFiles\_thumbs\Images\may-giat-aqua-aqw-s80at-5.jpg" />
+    <Content Include="UploadedFiles\_thumbs\Images\may-giat-aqua-aqw-s80at-6.jpg" />
+    <Content Include="UploadedFiles\_thumbs\Images\no-image-product.png" />
+    <Content Include="UploadedFiles\_thumbs\Images\samsung-galaxy-a50-black-1-400x460.png" />
+    <Content Include="UploadedFiles\_thumbs\Images\samsung-ua55nu7400-1-.jpg" />
+    <Content Include="UploadedFiles\_thumbs\Images\samsung-ua55nu7400-2.jpg" />
+    <Content Include="UploadedFiles\_thumbs\Images\samsung-ua55nu7400-5.jpg" />
+    <Content Include="UploadedFiles\_thumbs\Images\tivi-lg-49uk7500pta-1-2.jpg" />
+    <Content Include="UploadedFiles\_thumbs\Images\tivi-lg-49uk7500pta-25-550x340.jpg" />
+    <Content Include="UploadedFiles\_thumbs\Images\tivi-lg-49uk7500pta-3-2.jpg" />
+    <Content Include="UploadedFiles\_thumbs\Images\tivi-lg-49uk7500pta-5-2.jpg" />
+    <Content Include="UploadedFiles\_thumbs\Images\tivi-samsung-ua55nu7400-3-550x340.jpg" />
+    <Content Include="UploadedFiles\_thumbs\Images\tu-lanh-toshiba-gr-a28vm-ukg-10-300x300.jpg" />
+    <Content Include="UploadedFiles\_thumbs\Images\vi-vn-toshiba-gr-a28vm-ukg-5.jpg" />
+    <Content Include="UploadedFiles\_thumbs\Images\vi-vn-toshiba-gr-a28vm-ukg-6.jpg" />
+    <Content Include="UploadedFiles\_thumbs\Images\vi-vn-toshiba-gr-a28vm-ukg-7.jpg" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -6477,7 +6521,7 @@
     <Folder Include="app\shared\navigation\" />
     <Folder Include="App_Data\" />
     <Folder Include="Assets\admin\js\pages\" />
-    <Folder Include="UploadedFiles\" />
+    <Folder Include="UploadedFiles\files\" />
     <Folder Include="Views\About\" />
     <Folder Include="Views\Post\" />
   </ItemGroup>
@@ -6662,6 +6706,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Product\Search.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Product\Detail.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

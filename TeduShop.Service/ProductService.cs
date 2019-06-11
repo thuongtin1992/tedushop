@@ -30,7 +30,11 @@ namespace TeduShop.Service
 
         IEnumerable<string> GetListProductByName(string name);
 
+        IEnumerable<Product> GetRelatedProducts(int id, int top);
+
         Product GetById(int id);
+
+        void IncreaseViewCount(int id);
 
         void Save();
     }
@@ -55,7 +59,7 @@ namespace TeduShop.Service
         public Product Add(Product Product)
         {
             var product = _productRepository.Add(Product);
-            _unitOfWork.Commit();
+            //_unitOfWork.Commit();
             if (!string.IsNullOrEmpty(Product.Tags))
             {
                 string[] tags = Product.Tags.Split(',');
@@ -99,7 +103,7 @@ namespace TeduShop.Service
 
         public Product GetById(int id)
         {
-            return _productRepository.GetSingleById(id);
+            return _productRepository.GetSingleByCondition(m => m.ID == id && m.Status);
         }
 
         public void Save()
@@ -202,6 +206,25 @@ namespace TeduShop.Service
 
             totalRow = query.Count();
             return query.Skip((page - 1) * pageSize).Take(pageSize);
+        }
+
+        public void IncreaseViewCount(int id)
+        {
+            var model = GetById(id);
+            if (model.ViewCount >= 0)
+                model.ViewCount += 1;
+            else
+                model.ViewCount = 1;
+            _productRepository.Update(model);
+        }
+
+        public IEnumerable<Product> GetRelatedProducts(int id, int top)
+        {
+            var product = GetById(id);
+            return _productRepository
+                  .GetMulti(m => m.Status == true && m.ID != id && m.CategoryID == product.CategoryID)
+                  .OrderByDescending(m => m.CreatedDate)
+                  .Take(top);
         }
     }
 }
