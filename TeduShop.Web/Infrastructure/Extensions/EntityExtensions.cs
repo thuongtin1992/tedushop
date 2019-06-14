@@ -91,5 +91,21 @@ namespace TeduShop.Web.Infrastructure.Extensions
             product.Tags = productViewModel.Tags;
             product.Quantity = productViewModel.Quantity;
         }
+
+        public static void UpdatePage(this Page page, PageViewModel pageViewModel)
+        {
+            page.ID = pageViewModel.ID;
+            page.Name = pageViewModel.Name;
+            page.Alias = pageViewModel.Alias;
+            page.Description = pageViewModel.Description;
+            page.Content = pageViewModel.Content;
+            page.Status = pageViewModel.Status;
+            page.MetaKeyword = pageViewModel.MetaKeyword;
+            page.MetaDescription = pageViewModel.MetaDescription;
+            page.CreatedBy = pageViewModel.CreatedBy;
+            page.CreatedDate = pageViewModel.CreatedDate;
+            page.UpdatedBy = pageViewModel.UpdatedBy;
+            page.UpdatedDate = pageViewModel.UpdatedDate;
+        }
     }
 }
