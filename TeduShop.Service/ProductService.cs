@@ -36,6 +36,12 @@ namespace TeduShop.Service
 
         void IncreaseViewCount(int id);
 
+        IEnumerable<Tag> GetListTagByProductId(int id);
+
+        IEnumerable<Product> GetListProductByTag(string tagId, int page, int pageSize, string sort, out int totalRow);
+
+        Tag GetTag(string tagId);
+
         void Save();
     }
 
@@ -211,11 +217,10 @@ namespace TeduShop.Service
         public void IncreaseViewCount(int id)
         {
             var model = GetById(id);
-            if (model.ViewCount >= 0)
+            if (model.ViewCount.HasValue)
                 model.ViewCount += 1;
             else
                 model.ViewCount = 1;
-            _productRepository.Update(model);
         }
 
         public IEnumerable<Product> GetRelatedProducts(int id, int top)
@@ -225,6 +230,22 @@ namespace TeduShop.Service
                   .GetMulti(m => m.Status == true && m.ID != id && m.CategoryID == product.CategoryID)
                   .OrderByDescending(m => m.CreatedDate)
                   .Take(top);
+        }
+
+        public IEnumerable<Tag> GetListTagByProductId(int id)
+        {
+            return _productTagRepository.GetMulti(m => m.ProductID == id, new string[] { "Tag" }).Select(m => m.Tag);
+        }
+
+        public IEnumerable<Product> GetListProductByTag(string tagId, int page, int pageSize, string sort, out int totalRow)
+        {
+            var model = _productRepository.GetListProductByTag(tagId, page, pageSize, sort, out totalRow);
+            return model;
+        }
+
+        public Tag GetTag(string tagId)
+        {
+            return _tagRepository.GetSingleByCondition(m => m.ID == tagId);
         }
     }
 }

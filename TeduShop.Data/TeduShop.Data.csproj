@@ -99,6 +99,10 @@
     <Compile Include="Migrations\201906110840387_AddQuantityToProduct.Designer.cs">
       <DependentUpon>201906110840387_AddQuantityToProduct.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201906140421494_addforeignkey.cs" />
+    <Compile Include="Migrations\201906140421494_addforeignkey.Designer.cs">
+      <DependentUpon>201906140421494_addforeignkey.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\ErrorRepository.cs" />
@@ -159,6 +163,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201906110840387_AddQuantityToProduct.resx">
       <DependentUpon>201906110840387_AddQuantityToProduct.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201906140421494_addforeignkey.resx">
+      <DependentUpon>201906140421494_addforeignkey.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

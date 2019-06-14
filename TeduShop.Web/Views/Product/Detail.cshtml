@@ -4,8 +4,9 @@
 @{
     ViewBag.Title = Model.Name;
     Layout = "~/Views/Shared/_Layouts.cshtml";
-    var relatedProducts = (IEnumerable<ProductViewModel>)ViewBag.RelatedProducts;
+    var relatedProducts = (List<ProductViewModel>)ViewBag.RelatedProducts;
     var moreImages = (List<string>)ViewBag.MoreImages;
+    var productTags = (List<TagViewModel>)ViewBag.Tags;
 }
 
 @section headerExtension{
@@ -53,6 +54,16 @@
             </div>
             <h6>Còn @Model.Quantity sản phẩm</h6>
             <p>@Model.Description</p>
+            <div class="tag">
+                <h5>Tags: </h5>
+                <ul class="tag-list">
+                    @foreach (var tag in productTags)
+                    {
+                        <li><a href="/tags/@(tag.ID).html"><span class="label label-danger" style="font-size: 14px;">@tag.Name</span></a></li>
+                    }
+                </ul>
+            </div>
+            <div class="clearfix"></div>
             <div class="share">
                 <h5>Chia sẻ: </h5>
                 <ul class="share_nav">

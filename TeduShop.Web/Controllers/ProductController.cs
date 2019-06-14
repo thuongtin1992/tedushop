@@ -46,6 +46,11 @@ namespace TeduShop.Web.Controllers
             }
             #endregion
 
+            #region Tags
+            var tagsViewModel = _productService.GetListTagByProductId(id); 
+            ViewBag.Tags = Mapper.Map<IEnumerable<Tag>, IEnumerable<TagViewModel>>(tagsViewModel);
+            #endregion
+
             return View(productViewModel);
         }
 
@@ -101,6 +106,28 @@ namespace TeduShop.Web.Controllers
             return Json(new {
                 data = model
             }, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult ListProductByTags(string tagId, int page = 1, string sort = "")
+        {
+            int pageSize = int.Parse(ConfigHelper.GetByKey("PageSize"));
+            int totalRow = 0;
+            var productModel = _productService.GetListProductByTag(tagId, page, pageSize, sort, out totalRow);
+            var productViewModel = Mapper.Map<IEnumerable<Product>, IEnumerable<ProductViewModel>>(productModel);
+            int totalPages = (int)Math.Ceiling((double)(totalRow / pageSize));
+
+            var paginationSet = new PaginationSet<ProductViewModel>()
+            {
+                Items = productViewModel,
+                MaxPages = int.Parse(ConfigHelper.GetByKey("MaxPages")),
+                Page = page,
+                TotalCount = totalRow,
+                TotalPages = totalPages
+            };
+
+            ViewBag.Tag = Mapper.Map<Tag, TagViewModel>(_productService.GetTag(tagId));
+
+            return View(paginationSet);
         }
     }
 }
