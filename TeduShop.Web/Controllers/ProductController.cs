@@ -21,7 +21,7 @@ namespace TeduShop.Web.Controllers
             _productCategoryService = productCategoryService;
         }
 
-        [OutputCache(Duration = 3600)]
+        [OutputCache(Duration = 3600, VaryByParam = "id")]
         public ActionResult Detail(int id)
         {
             var productModel = _productService.GetById(id);

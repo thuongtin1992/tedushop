@@ -23,6 +23,7 @@ namespace TeduShop.Web.Controllers
             _productService = productService;
         }
 
+        [OutputCache(Duration = 600, Location = System.Web.UI.OutputCacheLocation.Server)]
         public ActionResult Index()
         {
             var slideModel = _commonService.GetSlides();
@@ -47,6 +48,7 @@ namespace TeduShop.Web.Controllers
         }
 
         [ChildActionOnly]
+        [OutputCache(Duration = 3600)]
         public ActionResult _Footer()
         {
             var footerModel = _commonService.GetFooter();
@@ -55,6 +57,7 @@ namespace TeduShop.Web.Controllers
         }
 
         [ChildActionOnly]
+        [OutputCache(Duration = 3600)]
         public ActionResult _Category()
         {
             var model = _productCategoryService.GetAll().Where(m => m.Status == true && m.HomeFlag == true).OrderBy(m => m.DisplayOrder).ThenByDescending(m => m.CreatedDate);
