@@ -25,6 +25,8 @@ namespace TeduShop.Service
 
         ProductCategory GetById(int id);
 
+        ProductCategory GetByIdWeb(int id);
+
         void Save();
     }
 
@@ -70,6 +72,11 @@ namespace TeduShop.Service
         public ProductCategory GetById(int id)
         {
             return _ProductCategoryRepository.GetSingleById(id);
+        }
+
+        public ProductCategory GetByIdWeb(int id)
+        {
+            return _ProductCategoryRepository.GetSingleByCondition(m => m.ID == id && m.Status);
         }
 
         public void Save()

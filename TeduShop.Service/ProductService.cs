@@ -1,6 +1,6 @@
 ﻿using System;
-using System.Linq;
 using System.Collections.Generic;
+using System.Linq;
 using TeduShop.Common;
 using TeduShop.Data.Infrastructure;
 using TeduShop.Data.Repositories;
@@ -34,6 +34,8 @@ namespace TeduShop.Service
 
         Product GetById(int id);
 
+        Product GetByIdWeb(int id);
+
         void IncreaseViewCount(int id);
 
         IEnumerable<Tag> GetListTagByProductId(int id);
@@ -65,7 +67,6 @@ namespace TeduShop.Service
         public Product Add(Product Product)
         {
             var product = _productRepository.Add(Product);
-            //_unitOfWork.Commit();
             if (!string.IsNullOrEmpty(Product.Tags))
             {
                 string[] tags = Product.Tags.Split(',');
@@ -109,7 +110,7 @@ namespace TeduShop.Service
 
         public Product GetById(int id)
         {
-            return _productRepository.GetSingleByCondition(m => m.ID == id && m.Status);
+            return _productRepository.GetSingleById(id);
         }
 
         public void Save()
@@ -162,15 +163,19 @@ namespace TeduShop.Service
                 case "new":
                     query = query.OrderByDescending(m => m.CreatedDate);
                     break;
+
                 case "popular":
                     query = query.OrderByDescending(m => m.ViewCount);
                     break;
+
                 case "discount":
                     query = query.Where(m => m.PromotionPrice.HasValue).OrderByDescending(m => m.PromotionPrice);
                     break;
+
                 case "price":
                     query = query.OrderBy(m => m.Price);
                     break;
+
                 default:
                     query = query.OrderByDescending(m => m.CreatedDate);
                     break;
@@ -196,15 +201,19 @@ namespace TeduShop.Service
                 case "new":
                     query = query.OrderByDescending(m => m.CreatedDate);
                     break;
+
                 case "popular":
                     query = query.OrderByDescending(m => m.ViewCount);
                     break;
+
                 case "discount":
                     query = query.Where(m => m.PromotionPrice.HasValue).OrderByDescending(m => m.PromotionPrice);
                     break;
+
                 case "price":
                     query = query.OrderBy(m => m.Price);
                     break;
+
                 default:
                     query = query.OrderByDescending(m => m.CreatedDate);
                     break;
@@ -216,8 +225,8 @@ namespace TeduShop.Service
 
         public void IncreaseViewCount(int id)
         {
-            var model = GetById(id);
-            if (model.ViewCount.HasValue)
+            var model = GetByIdWeb(id);
+            if (model.ViewCount.HasValue && model.ViewCount > 0 && model.Status)
                 model.ViewCount += 1;
             else
                 model.ViewCount = 1;
@@ -225,7 +234,7 @@ namespace TeduShop.Service
 
         public IEnumerable<Product> GetRelatedProducts(int id, int top)
         {
-            var product = GetById(id);
+            var product = GetByIdWeb(id);
             return _productRepository
                   .GetMulti(m => m.Status == true && m.ID != id && m.CategoryID == product.CategoryID)
                   .OrderByDescending(m => m.CreatedDate)
@@ -246,6 +255,11 @@ namespace TeduShop.Service
         public Tag GetTag(string tagId)
         {
             return _tagRepository.GetSingleByCondition(m => m.ID == tagId);
+        }
+
+        public Product GetByIdWeb(int id)
+        {
+            return _productRepository.GetSingleByCondition(m => m.ID == id && m.Status);
         }
     }
 }

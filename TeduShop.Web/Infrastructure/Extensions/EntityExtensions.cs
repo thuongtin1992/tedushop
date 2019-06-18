@@ -106,6 +106,21 @@ namespace TeduShop.Web.Infrastructure.Extensions
             page.CreatedDate = pageViewModel.CreatedDate;
             page.UpdatedBy = pageViewModel.UpdatedBy;
             page.UpdatedDate = pageViewModel.UpdatedDate;
+            page.ViewCount = pageViewModel.ViewCount;
+        }
+
+        public static void UpdateFeedback(this Feedback feedback, FeedbackViewModel feedbackViewModel)
+        {
+            feedback.ID = feedbackViewModel.ID;
+            feedback.FirstName = feedbackViewModel.FirstName;
+            feedback.LastName = feedbackViewModel.LastName;
+            feedback.FullName = feedbackViewModel.FullName;
+            feedback.Phone = feedbackViewModel.Phone;
+            feedback.Email = feedbackViewModel.Email;
+            feedback.Address = feedbackViewModel.Address;
+            feedback.Message = feedbackViewModel.Message;
+            feedback.CreatedDate = feedbackViewModel.CreatedDate;
+            feedback.Status = feedbackViewModel.Status;
         }
     }
 }

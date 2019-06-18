@@ -107,10 +107,19 @@
     <Compile Include="Migrations\201906150304580_AddContactDetailTable.Designer.cs">
       <DependentUpon>201906150304580_AddContactDetailTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201906160847109_AddViewCountToPageTable.cs" />
+    <Compile Include="Migrations\201906160847109_AddViewCountToPageTable.Designer.cs">
+      <DependentUpon>201906160847109_AddViewCountToPageTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201906180254116_AddFeedbackTable.cs" />
+    <Compile Include="Migrations\201906180254116_AddFeedbackTable.Designer.cs">
+      <DependentUpon>201906180254116_AddFeedbackTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\ContactDetailRepository.cs" />
     <Compile Include="Repositories\ErrorRepository.cs" />
+    <Compile Include="Repositories\FeedbackRepository.cs" />
     <Compile Include="Repositories\FooterRepository.cs" />
     <Compile Include="Repositories\MenuGroupRepository.cs" />
     <Compile Include="Repositories\MenuRepository.cs" />
@@ -174,6 +183,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201906150304580_AddContactDetailTable.resx">
       <DependentUpon>201906150304580_AddContactDetailTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201906160847109_AddViewCountToPageTable.resx">
+      <DependentUpon>201906160847109_AddViewCountToPageTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201906180254116_AddFeedbackTable.resx">
+      <DependentUpon>201906180254116_AddFeedbackTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

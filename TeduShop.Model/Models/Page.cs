@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using TeduShop.Model.Abstract;
 
@@ -24,6 +25,9 @@ namespace TeduShop.Model.Models
         public string Description { get; set; }
 
         public string Content { get; set; }
+
+        [DefaultValue(0)]
+        public int? ViewCount { get; set; }
 
     }
 }

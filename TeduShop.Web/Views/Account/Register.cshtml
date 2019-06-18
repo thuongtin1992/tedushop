@@ -1,0 +1,72 @@
+﻿@model TeduShop.Web.Models.RegisterViewModel
+@using BotDetect.Web.Mvc;
+@{
+    ViewBag.Title = "Đăng ký thành viên";
+    Layout = "~/Views/Shared/_Layouts.cshtml";
+    MvcCaptcha registerCaptcha = new MvcCaptcha("registerCaptcha");
+}
+
+@section headerExtension{
+    <link href="@BotDetect.Web.CaptchaUrls.Absolute.LayoutStyleSheetUrl" rel="stylesheet" type="text/css" />
+}
+
+@section footerJs{
+    <script src="/Scripts/jquery.validate.min.js"></script>
+    <script src="/Scripts/jquery.validate.unobtrusive.min.js"></script>
+}
+
+<div class="register">
+    @if (ViewData["SuccessMsg"] != null)
+    {
+        <div class="alert alert-success alert-dismissable">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+            <strong>@ViewData["SuccessMsg"].ToString()</strong>
+            <p>Vui lòng click <a href="/dang-nhap.html">vào đây</a> để đăng nhập.</p>
+        </div>
+    }
+
+    @using (Html.BeginForm("Register", "Account", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken();
+        @Html.ValidationSummary(true)
+        <div class="register-top-grid">
+            <h3>Thông tin cá nhân</h3>
+            <div class="mation">
+                <span>Họ tên<label> *</label></span>
+                @Html.ValidationMessageFor(model => model.FullName, "", new { @class = "error" })
+                @Html.TextBoxFor(model => model.FullName)
+                <span>Email<label> *</label></span>
+                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "error" })
+                @Html.TextBoxFor(model => model.Email)
+                
+                <span>Địa chỉ<label> *</label></span>
+                @Html.ValidationMessageFor(model => model.Address, "", new { @class = "error" })
+                @Html.TextBoxFor(model => model.Address)
+                
+                <span>Số điện thoại<label> *</label></span>
+                @Html.ValidationMessageFor(model => model.Phone, "", new { @class = "error" })
+                @Html.TextBoxFor(model => model.Phone)
+               
+                <span>Tên đăng nhập<label> *</label></span>
+                @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "error" })
+                @Html.TextBoxFor(model => model.UserName)
+                
+                <span>Mật khẩu<label> *</label></span>
+                @Html.ValidationMessageFor(model => model.Password, "", new { @class = "error" })
+                @Html.PasswordFor(model => model.Password)
+                
+
+                @Html.Captcha(registerCaptcha)
+                @Html.ValidationMessage("CaptchaCode", new { @class = "error" })
+                @Html.TextBox("CaptchaCode")
+               
+            </div>
+            <div class="clearfix"> </div>
+        </div>
+        <div class="clearfix"> </div>
+        <div class="register-but">
+            <input type="submit" value="Đăng ký">
+            <div class="clearfix"> </div>
+        </div>
+    }
+</div>

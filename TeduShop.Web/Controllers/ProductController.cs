@@ -24,13 +24,8 @@ namespace TeduShop.Web.Controllers
         [OutputCache(Duration = 3600, VaryByParam = "id")]
         public ActionResult Detail(int id)
         {
-            var productModel = _productService.GetById(id);
+            var productModel = _productService.GetByIdWeb(id);
             var productViewModel = Mapper.Map<Product, ProductViewModel>(productModel);
-
-            #region view count
-            _productService.IncreaseViewCount(id);
-            _productService.Save();
-            #endregion
 
             #region realted products
             var relatedProducts = _productService.GetRelatedProducts(id, 6);
@@ -49,6 +44,11 @@ namespace TeduShop.Web.Controllers
             #region Tags
             var tagsViewModel = _productService.GetListTagByProductId(id); 
             ViewBag.Tags = Mapper.Map<IEnumerable<Tag>, IEnumerable<TagViewModel>>(tagsViewModel);
+            #endregion
+
+            #region view count
+            _productService.IncreaseViewCount(id);
+            _productService.Save();
             #endregion
 
             return View(productViewModel);
@@ -71,7 +71,7 @@ namespace TeduShop.Web.Controllers
                 TotalPages = totalPages
             };
 
-            var category = _productCategoryService.GetById(id);
+            var category = _productCategoryService.GetByIdWeb(id);
             ViewBag.Category = Mapper.Map<ProductCategory, ProductCategoryViewModel>(category);
 
             return View(paginationSet);

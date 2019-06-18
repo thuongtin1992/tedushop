@@ -1,12 +1,16 @@
 ﻿@using TeduShop.Web.Models;
-@model ContactDetailViewModel
+@using BotDetect.Web.Mvc;
+
+@model FeedbackViewModel
 
 @{
     ViewBag.Title = "Liên hệ";
     Layout = "~/Views/Shared/_Layouts.cshtml";
+    MvcCaptcha contactCaptcha = new MvcCaptcha("contactCaptcha");
 }
 
 @section headerExtension{
+    <link href="@BotDetect.Web.CaptchaUrls.Absolute.LayoutStyleSheetUrl" rel="stylesheet" type="text/css" />
     <style type="text/css">
         #map{
             height: 450px;
@@ -15,6 +19,8 @@
 }
 
 @section footerJs{
+    <script src="/Scripts/jquery.validate.min.js"></script>
+    <script src="/Scripts/jquery.validate.unobtrusive.min.js"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAk3Eeu6MXm1Y6qil2hO6j89kckY5nnSTo"></script>
     <script src="/Assets/client/js/controller/contact.js"></script>
 }
@@ -24,20 +30,19 @@
         <div class="contact_right">
             <h3>THÔNG TIN LIÊN HỆ</h3>
             <address class="address">
-                <p>@Model.Address</p>
+                <p>@Model.ContactDetail.Address</p>
                 <dl>
                     <dt> </dt>
-                    <dd>Điện thoại:<span> @Model.Phone</span></dd>
-                    <dd>FAX: <span>+1 800 658 5784</span></dd>
-                    <dd>E-mail:&nbsp; <a href="mailto:@(Model.Email)">@Model.Email</a></dd>
+                    <dd>Điện thoại:<span> @Model.ContactDetail.Phone</span></dd>
+                    <dd>E-mail:&nbsp; <a href="mailto:@(Model.ContactDetail.Email)">@Model.ContactDetail.Email</a></dd>
                 </dl>
             </address>
             <div class="clearfix"></div>
             <div id="map"></div>
-            <input type="hidden" id="hidAddress" value="@Model.Name<br/>Điện thoại: @Model.Phone<br/>Địa chỉ: @Model.Address" />
-            <input type="hidden" id="hidLat" value="@Model.Latitude" />
-            <input type="hidden" id="hidLng" value="@Model.Longitude" />
-            <input type="hidden" id="hidName" value="@Model.Name" />
+            <input type="hidden" id="hidAddress" value="@Model.ContactDetail.Name<br/>Điện thoại: @Model.ContactDetail.Phone<br/>Địa chỉ: @Model.ContactDetail.Address" />
+            <input type="hidden" id="hidLat" value="@Model.ContactDetail.Latitude" />
+            <input type="hidden" id="hidLng" value="@Model.ContactDetail.Longitude" />
+            <input type="hidden" id="hidName" value="@Model.ContactDetail.Name" />
         </div>
     </div>
 
@@ -45,13 +50,31 @@
         <div class="contact_right">
             <h3>LIÊN HỆ VỚI CHÚNG TÔI</h3>
             <div class="contact-form">
-                <form method="post" action="contact-post.html">
-                    <input type="text" class="textbox" placeholder="Nhập họ tên...">
-                    <input type="text" class="textbox" placeholder="Nhập email...">
-                    <textarea placeholder="Nhập tin nhắn..."></textarea>
+                @if (ViewData["SuccessMsg"] != null)
+                {
+                    <div class="alert alert-success alert-dismissable">
+                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                        <strong>@ViewData["SuccessMsg"].ToString()</strong> 
+                    </div>
+                }
+                @using (Html.BeginForm("SendFeedback", "Contact", FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true)
+                    @Html.TextBoxFor(model => model.FullName, htmlAttributes: new { @class = "textbox", @placeholder = "Nhập họ & tên" })
+                    @Html.ValidationMessageFor(model => model.FullName, "", htmlAttributes: new { @class = "error" })
+                    @Html.TextBoxFor(model => model.Email, htmlAttributes: new { @class = "textbox", @placeholder = "Nhập email" })
+                    @Html.ValidationMessageFor(model => model.Email, "", htmlAttributes: new { @class = "error" })
+                    @Html.TextAreaFor(model => model.Message, htmlAttributes: new { @placeholder = "Nhập nội dung" })
+                    @Html.ValidationMessageFor(model => model.Message, "", htmlAttributes: new { @class = "error" })
+                    
+                    @Html.Captcha(contactCaptcha)
+                    @Html.TextBox("CaptchaCode")
+                    @Html.ValidationMessage("CaptchaCode", htmlAttributes: new { @class = "error" })
+
                     <input type="submit" value="Gửi">
                     <div class="clearfix"> </div>
-                </form>
+                }
             </div>
         </div>
     </div>

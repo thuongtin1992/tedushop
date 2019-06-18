@@ -18,10 +18,14 @@ namespace TeduShop.Web.Controllers
             _pageService = pageService;
         }
         
+        [OutputCache(Duration = 3600 * 24, Location = System.Web.UI.OutputCacheLocation.Server, VaryByParam = "alias")]
         public ActionResult Index(string alias)
         {
             var page = _pageService.GetByAlias(alias);
             var pageViewModel = Mapper.Map<Page, PageViewModel>(page);
+            _pageService.IncreaseViewCount(alias);
+            _pageService.Save();
+
             return View(pageViewModel);
         }
     }

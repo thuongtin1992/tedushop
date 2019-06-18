@@ -76,26 +76,31 @@
         </div>
         <div class="clearfix"> </div>
     </div>
-    <h3>SẢN PHẨM LIÊN QUAN</h3>
-    <ul id="flexiselDemo1">
-        @foreach (var product in relatedProducts)
-        {
-            <li><img src="@product.Image" /><div class="grid-flex"><a href="/@(product.Alias).p-@(product.ID).html">@(product.Name.Length > 20 ? product.Name.Substring(0, 20) + "..." : product.Name)</a>
-                <p>
-                @if (product.PromotionPrice.HasValue)
-                {
-                    @(product.PromotionPrice.Value == 0 ? "Liên hệ" : product.PromotionPrice.Value.ToString("N2"))
-                }
-                else
-                {
-                    @(product.Price == 0 ? "Liên hệ" : product.Price.ToString("N2"))
-                }
-                </p>
-                </div>
-        </li>
-        }
-    </ul>
-    
+    @if (relatedProducts != null && relatedProducts.Count > 0)
+    {
+        <h3>SẢN PHẨM LIÊN QUAN</h3>
+        <ul id="flexiselDemo1">
+            @foreach (var product in relatedProducts)
+            {
+                <li>
+                    <img src="@product.Image" /><div class="grid-flex">
+                        <a href="/@(product.Alias).p-@(product.ID).html">@(product.Name.Length > 20 ? product.Name.Substring(0, 20) + "..." : product.Name)</a>
+                        <p>
+                            @if (product.PromotionPrice.HasValue)
+                            {
+                                @(product.PromotionPrice.Value == 0 ? "Liên hệ" : product.PromotionPrice.Value.ToString("N2"))
+                            }
+                            else
+                            {
+                                @(product.Price == 0 ? "Liên hệ" : product.Price.ToString("N2"))
+                            }
+                        </p>
+                    </div>
+                </li>
+            }
+        </ul>
+    }
+
     <div class="toogle">
         <h3 class="m_3">Chi tiết sản phẩm</h3>
         <p class="m_text">@Html.Raw(Model.Content)</p>
