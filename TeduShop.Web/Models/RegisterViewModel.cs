@@ -21,6 +21,12 @@ namespace TeduShop.Web.Models
         [MinLength(6, ErrorMessage = "{0} phải có ít nhất {1} ký tự")]
         public string Password { get; set; }
 
+        [Display(Name = "Xác nhận mật khẩu")]
+        [Required(ErrorMessage = "Phải xác nhận mật khẩu")]
+        [MinLength(6, ErrorMessage = "{0} phải có ít nhất {1} ký tự")]
+        [Compare("Password", ErrorMessage = "Mật khẩu chưa trùng nhau.")]
+        public string RePassword { get; set; }
+
         [Required(ErrorMessage = "Phải nhập {0}")]
         [EmailAddress(ErrorMessage = "{0} không đúng định dạng")]
         public string Email { get; set; }

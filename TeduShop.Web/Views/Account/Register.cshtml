@@ -55,6 +55,9 @@
                 @Html.ValidationMessageFor(model => model.Password, "", new { @class = "error" })
                 @Html.PasswordFor(model => model.Password)
                 
+                <span>Xác nhận mật khẩu<label> *</label></span>
+                @Html.ValidationMessageFor(model => model.RePassword, "", new { @class = "error" })
+                @Html.PasswordFor(model => model.RePassword)
 
                 @Html.Captcha(registerCaptcha)
                 @Html.ValidationMessage("CaptchaCode", new { @class = "error" })
