@@ -115,8 +115,44 @@
     <Compile Include="Migrations\201906180254116_AddFeedbackTable.Designer.cs">
       <DependentUpon>201906180254116_AddFeedbackTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201906191329499_AddCustomerIdToOrderTable.cs" />
+    <Compile Include="Migrations\201906191329499_AddCustomerIdToOrderTable.Designer.cs">
+      <DependentUpon>201906191329499_AddCustomerIdToOrderTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201906191416595_AlterTableOrderDetail.cs" />
+    <Compile Include="Migrations\201906191416595_AlterTableOrderDetail.Designer.cs">
+      <DependentUpon>201906191416595_AlterTableOrderDetail.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201906191525161_AlterTableOrder.cs" />
+    <Compile Include="Migrations\201906191525161_AlterTableOrder.Designer.cs">
+      <DependentUpon>201906191525161_AlterTableOrder.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201906200328211_AlterTableOrder_Message.cs" />
+    <Compile Include="Migrations\201906200328211_AlterTableOrder_Message.Designer.cs">
+      <DependentUpon>201906200328211_AlterTableOrder_Message.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201906200806510_RenameTablesIdentity.cs" />
+    <Compile Include="Migrations\201906200806510_RenameTablesIdentity.Designer.cs">
+      <DependentUpon>201906200806510_RenameTablesIdentity.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201906200846497_AddGroupUser.cs" />
+    <Compile Include="Migrations\201906200846497_AddGroupUser.Designer.cs">
+      <DependentUpon>201906200846497_AddGroupUser.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201906230240266_ChangeOrderDetailAndProduct.cs" />
+    <Compile Include="Migrations\201906230240266_ChangeOrderDetailAndProduct.Designer.cs">
+      <DependentUpon>201906230240266_ChangeOrderDetailAndProduct.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201906230410524_RevenueStatisticSP.cs" />
+    <Compile Include="Migrations\201906230410524_RevenueStatisticSP.Designer.cs">
+      <DependentUpon>201906230410524_RevenueStatisticSP.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\ApplicationGroupRepository.cs" />
+    <Compile Include="Repositories\ApplicationRoleGroupRepository.cs" />
+    <Compile Include="Repositories\ApplicationRoleRepository.cs" />
+    <Compile Include="Repositories\ApplicationUserGroupRepository.cs" />
     <Compile Include="Repositories\ContactDetailRepository.cs" />
     <Compile Include="Repositories\ErrorRepository.cs" />
     <Compile Include="Repositories\FeedbackRepository.cs" />
@@ -189,6 +225,30 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201906180254116_AddFeedbackTable.resx">
       <DependentUpon>201906180254116_AddFeedbackTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201906191329499_AddCustomerIdToOrderTable.resx">
+      <DependentUpon>201906191329499_AddCustomerIdToOrderTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201906191416595_AlterTableOrderDetail.resx">
+      <DependentUpon>201906191416595_AlterTableOrderDetail.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201906191525161_AlterTableOrder.resx">
+      <DependentUpon>201906191525161_AlterTableOrder.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201906200328211_AlterTableOrder_Message.resx">
+      <DependentUpon>201906200328211_AlterTableOrder_Message.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201906200806510_RenameTablesIdentity.resx">
+      <DependentUpon>201906200806510_RenameTablesIdentity.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201906200846497_AddGroupUser.resx">
+      <DependentUpon>201906200846497_AddGroupUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201906230240266_ChangeOrderDetailAndProduct.resx">
+      <DependentUpon>201906230240266_ChangeOrderDetailAndProduct.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201906230410524_RevenueStatisticSP.resx">
+      <DependentUpon>201906230410524_RevenueStatisticSP.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

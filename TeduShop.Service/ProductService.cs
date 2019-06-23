@@ -45,6 +45,8 @@ namespace TeduShop.Service
         Tag GetTag(string tagId);
 
         void Save();
+
+        bool SellProduct(int productId, int quantity);
     }
 
     public class ProductService : IProductService
@@ -260,6 +262,17 @@ namespace TeduShop.Service
         public Product GetByIdWeb(int id)
         {
             return _productRepository.GetSingleByCondition(m => m.ID == id && m.Status);
+        }
+
+        public bool SellProduct(int productId, int quantity)
+        {
+            var product = GetByIdWeb(productId);
+
+            if (product.Quantity < quantity)
+                return false;
+
+            product.Quantity -= quantity;
+            return true;
         }
     }
 }

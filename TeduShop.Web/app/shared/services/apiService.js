@@ -20,7 +20,7 @@
             }, function (error) {
                 console.log(error.status)
                 if (error.status === 401) {
-                    notificationService.displayError('Authenticate is required.');
+                    notificationService.displayError('Không có quyền truy cập.');
                 }
                 else if (failure != null) {
                     failure(error);
@@ -36,7 +36,7 @@
             }, function (error) {
                 console.log(error.status)
                 if (error.status === 401) {
-                    notificationService.displayError('Authenticate is required.');
+                    notificationService.displayError('Không có quyền truy cập.');
                 }
                 else if (failure != null) {
                     failure(error);
@@ -52,7 +52,7 @@
             }, function (error) {
                 console.log(error.status)
                 if (error.status === 401) {
-                    notificationService.displayError('Authenticate is required.');
+                    notificationService.displayError('Không có quyền truy cập.');
                 }
                 else if (failure != null) {
                     failure(error);

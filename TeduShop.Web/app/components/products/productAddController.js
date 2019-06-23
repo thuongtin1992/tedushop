@@ -6,6 +6,7 @@
     function productAddController(apiService, $scope, notificationService, $state, commonService) {
         $scope.product = {
             Status: true,
+            OriginalPrice: 0,
             Price: 0,
             Warranty: 12,
             Quantity: 0

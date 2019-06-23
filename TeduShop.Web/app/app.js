@@ -4,7 +4,11 @@
     angular.module('tedushop',
         ['tedushop.products',
          'tedushop.product_categories',
+         'tedushop.application_groups',
+         'tedushop.application_roles',
+         'tedushop.application_users',
          'tedushop.pages',
+         'tedushop.statistics',
          'tedushop.common'])
         .config(config)
         .config(configAuthentication);
@@ -27,6 +31,12 @@
                 parent: 'base',
                 templateUrl: "/app/components/home/homeView.html",
                 controller: "homeController"
+            })
+            .state('unauthorize', {
+                url: "/unauthorize",
+                parent: 'base',
+                templateUrl: "/app/components/home/unauthorizeView.html",
+                controller: "unauthorizeController"
             });
         $urlRouterProvider.otherwise('/login');
     }
@@ -42,14 +52,14 @@
                 },
                 response: function (response) {
                     if (response.status == "401") {
-                        $location.path('/login');
+                        $location.path('/unauthorize');
                     }
                     //the same response/modified/or a new one need to be returned.
                     return response;
                 },
                 responseError: function (rejection) {
                     if (rejection.status == "401") {
-                        $location.path('/login');
+                        $location.path('/unauthorize');
                     }
                     return $q.reject(rejection);
                 }

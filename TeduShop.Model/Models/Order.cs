@@ -29,7 +29,6 @@ namespace TeduShop.Model.Models
         [Column(TypeName = "varchar")]
         public string CustomerMobile { set; get; }
 
-        [Required]
         [MaxLength(250)]
         public string CustomerMessage { set; get; }
 
@@ -39,10 +38,17 @@ namespace TeduShop.Model.Models
         public DateTime? CreatedDate { set; get; }
         public string CreatedBy { set; get; }
 
-        [Required]
         [MaxLength(50)]
         public string PaymentStatus { set; get; }
+
         public bool Status { set; get; }
+
+        [MaxLength(128)]
+        [Column(TypeName = "nvarchar")]
+        public string CustomerId { get; set; }
+
+        [ForeignKey("CustomerId")]
+        public virtual ApplicationUser User { get; set; }
 
         public virtual IEnumerable<OrderDetail> OrderDetails { set; get; }
     }

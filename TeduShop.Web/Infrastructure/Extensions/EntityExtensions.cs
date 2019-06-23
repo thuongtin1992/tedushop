@@ -1,4 +1,5 @@
-﻿using TeduShop.Model.Models;
+﻿using System;
+using TeduShop.Model.Models;
 using TeduShop.Web.Models;
 
 namespace TeduShop.Web.Infrastructure.Extensions
@@ -90,6 +91,7 @@ namespace TeduShop.Web.Infrastructure.Extensions
             product.Status = productViewModel.Status;
             product.Tags = productViewModel.Tags;
             product.Quantity = productViewModel.Quantity;
+            product.OriginalPrice = productViewModel.OriginalPrice;
         }
 
         public static void UpdatePage(this Page page, PageViewModel pageViewModel)
@@ -121,6 +123,48 @@ namespace TeduShop.Web.Infrastructure.Extensions
             feedback.Message = feedbackViewModel.Message;
             feedback.CreatedDate = feedbackViewModel.CreatedDate;
             feedback.Status = feedbackViewModel.Status;
+        }
+
+        public static void UpdateOrder(this Order order, OrderViewModel orderViewModel)
+        {
+            order.ID = orderViewModel.ID;
+            order.CustomerName = orderViewModel.CustomerName;
+            order.CustomerAddress = orderViewModel.CustomerName;
+            order.CustomerEmail = orderViewModel.CustomerName;
+            order.CustomerMobile = orderViewModel.CustomerName;
+            order.CustomerMessage = orderViewModel.CustomerName;
+            order.PaymentMethod = orderViewModel.CustomerName;
+            order.PaymentStatus = orderViewModel.PaymentStatus;
+            order.CreatedDate = orderViewModel.CreatedDate;
+            order.CreatedBy = orderViewModel.CreatedBy;
+            order.Status = orderViewModel.Status;
+            order.CustomerId = orderViewModel.CustomerId;
+        }
+
+        public static void UpdateApplicationGroup(this ApplicationGroup appGroup, ApplicationGroupViewModel appGroupViewModel)
+        {
+            appGroup.ID = appGroupViewModel.ID;
+            appGroup.Name = appGroupViewModel.Name;
+        }
+
+        public static void UpdateApplicationRole(this ApplicationRole appRole, ApplicationRoleViewModel appRoleViewModel, string action = "add")
+        {
+            if (action == "update")
+                appRole.Id = appRoleViewModel.Id;
+            else
+                appRole.Id = Guid.NewGuid().ToString();
+            appRole.Name = appRoleViewModel.Name;
+            appRole.Description = appRoleViewModel.Description;
+        }
+
+        public static void UpdateUser(this ApplicationUser appUser, ApplicationUserViewModel appUserViewModel, string action = "add")
+        {
+            appUser.Id = appUserViewModel.Id;
+            appUser.FullName = appUserViewModel.FullName;
+            appUser.BirthDay = appUserViewModel.BirthDay;
+            appUser.Email = appUserViewModel.Email;
+            appUser.UserName = appUserViewModel.UserName;
+            appUser.PhoneNumber = appUserViewModel.PhoneNumber;
         }
     }
 }

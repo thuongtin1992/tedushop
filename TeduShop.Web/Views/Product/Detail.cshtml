@@ -42,14 +42,14 @@
                 <div class="left-n ">
                     @if (Model.PromotionPrice.HasValue)
                     {
-                        @(Model.PromotionPrice.Value == 0 ? "Liên hệ" : Model.PromotionPrice.Value.ToString("N2"))
+                        @(Model.PromotionPrice.Value == 0 ? "Liên hệ" : Model.PromotionPrice.Value.ToString("N0"))
                     }
                     else
                     {
-                        @(Model.Price == 0 ? "Liên hệ" : Model.Price.ToString("N2"))
+                        @(Model.Price == 0 ? "Liên hệ" : Model.Price.ToString("N0"))
                     }
                 </div>
-                <a class="now-get get-cart-in" href="/them-vao-gio-hang/@Model.ID">THÊM VÀO GIỎ HÀNG</a>
+                <a class="now-get get-cart-in btnAddToCart" href="#" data-id="@Model.ID">THÊM VÀO GIỎ HÀNG</a>
                 <div class="clearfix"></div>
             </div>
             <h6>Còn @Model.Quantity sản phẩm</h6>
@@ -107,7 +107,7 @@
     </div>
 </div>
 
-@section footerJs{
+@section footerJs{  
     <script type="text/javascript" src="/Assets/client/js/jquery.flexisel.js"></script>
     <script src="/Assets/client/js/jquery.etalage.min.js"></script>
     <script type="text/javascript">
