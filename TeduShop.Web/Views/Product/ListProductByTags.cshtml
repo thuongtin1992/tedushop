@@ -4,7 +4,10 @@
 
 @{
     var tag = (TagViewModel)ViewBag.Tag;
-    ViewBag.Title = "Tag: " + tag.Name;
+    var pageIndex = Model.Page;
+    ViewBag.Title = pageIndex == 1 ? "Tag: " + tag.Name : "Tag: " + tag.Name + " - trang " + pageIndex; 
+    ViewBag.MetaKeyword = pageIndex == 1 ? "Tag: " + tag.Name : "Tag: " + tag.Name + " - trang " + pageIndex;
+    ViewBag.MetaDescription = pageIndex == 1 ? "Tag: " + tag.Name : "Tag: " + tag.Name + " - trang " + pageIndex;
     Layout = "~/Views/Shared/_Layouts.cshtml";
 }
 

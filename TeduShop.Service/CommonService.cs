@@ -14,17 +14,21 @@ namespace TeduShop.Service
     {
         Footer GetFooter();
         IEnumerable<Slide> GetSlides();
+        SystemConfig GetSystemConfig(string code);
     }
+
     public class CommonService : ICommonService
     {
         IFooterRepository _footerRepository;
         ISlideRepository _slideRepository;
+        ISystemConfigRepository _systemConfigRepository;
         IUnitOfWork _unitOfWork;
 
-        public CommonService(IFooterRepository footerRepository, ISlideRepository slideRepository, IUnitOfWork unitOfWork)
+        public CommonService(IFooterRepository footerRepository, ISlideRepository slideRepository, ISystemConfigRepository systemConfigRepository, IUnitOfWork unitOfWork)
         {
             _footerRepository = footerRepository;
             _slideRepository = slideRepository;
+            _systemConfigRepository = systemConfigRepository;
             _unitOfWork = unitOfWork;
         }
 
@@ -36,6 +40,11 @@ namespace TeduShop.Service
         public IEnumerable<Slide> GetSlides()
         {
             return _slideRepository.GetMulti(m => m.Status == true).OrderBy(m => m.DisplayOrder);
+        }
+
+        public SystemConfig GetSystemConfig(string code)
+        {
+            return _systemConfigRepository.GetSingleByCondition(x => x.Code == code && x.Status);
         }
     }
 }

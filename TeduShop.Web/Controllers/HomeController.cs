@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using TeduShop.Common;
 using TeduShop.Model.Models;
 using TeduShop.Service;
 using TeduShop.Web.Models;
@@ -36,6 +37,10 @@ namespace TeduShop.Web.Controllers
             homeViewModel.Slides = slideViewModel;
             homeViewModel.LatestProducts = latestProductViewModel;
             homeViewModel.TopSaleProducts = topsaleProductViewModel;
+
+            homeViewModel.Title = _commonService.GetSystemConfig(CommonConstants.HomeTitle).ValueString != null ? _commonService.GetSystemConfig(CommonConstants.HomeTitle).ValueString : "TEDU SHOP";
+            homeViewModel.MetaKeyword = _commonService.GetSystemConfig(CommonConstants.HomeMetaKeyword).ValueString != null ? _commonService.GetSystemConfig(CommonConstants.HomeMetaKeyword).ValueString : "Trang chủ TEDU SHOP";
+            homeViewModel.MetaDescription = _commonService.GetSystemConfig(CommonConstants.HomeMetaDescription).ValueString != null ? _commonService.GetSystemConfig(CommonConstants.HomeMetaDescription).ValueString : "Trang chủ TEDU SHOP";
 
             return View(homeViewModel);
         }

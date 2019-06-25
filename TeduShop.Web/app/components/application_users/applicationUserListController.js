@@ -31,6 +31,7 @@
                     });
                 });
         }
+
         function search(page) {
             page = page || 0;
 
@@ -57,6 +58,7 @@
                 notificationService.displayInfo(result.data.Items.length + ' items found');
             }
         }
+        
         function dataLoadFailed(response) {
             notificationService.displayError(response.data);
         }

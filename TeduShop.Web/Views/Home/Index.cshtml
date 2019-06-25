@@ -1,7 +1,9 @@
 ﻿@using TeduShop.Web.Models;
 @model HomeViewModel
 @{
-    ViewBag.Title = "Trang chủ";
+    ViewBag.Title = Model.Title;
+    ViewBag.MetaKeyword = Model.MetaKeyword;
+    ViewBag.MetaDescription = Model.MetaDescription;
     Layout = "~/Views/Shared/_Layouts.cshtml";
 }
 
