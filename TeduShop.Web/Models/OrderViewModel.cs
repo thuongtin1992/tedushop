@@ -46,6 +46,8 @@ namespace TeduShop.Web.Models
         [MaxLength(128)]
         public string CustomerId { set; get; }
 
+        public string BankCode { get; set; }
+
         public IEnumerable<OrderDetailViewModel> OrderDetails { set; get; }
     }
 }

@@ -110,6 +110,20 @@
                 cart.createOrder();
             }
         });
+
+        $('input[name="paymentMethod"]').off('click').on('click', function () {
+            if ($(this).val() == 'NL') {
+                $('.boxContent').hide();
+                $('#nganluongContent').show();
+            }
+            else if ($(this).val() == 'ATM_ONLINE') {
+                $('.boxContent').hide();
+                $('#bankContent').show();
+            }
+            else {
+                $('.boxContent').hide();
+            }
+        });
     },
     getLoginUser: function () {
         $.ajax({
@@ -134,6 +148,8 @@
             CustomerEmail: $('#txtEmail').val(),
             CustomerMobile: $('#txtPhone').val(),
             CustomerMessage: $('#txtMessage').val(),
+            PaymentMethod: $('input[name="paymentMethod"]:checked').val(),
+            BankCode: $('input[groupname="bankCode"]:checked').prop('id'),
             Status: false
         }
         $.ajax({
@@ -145,20 +161,27 @@
             },
             success: function (response) {
                 if (response.status) {
-                    console.log('create order ok');
-                    $('#divCheckout').hide(500);
-                    cart.deleteAll();
-                    Swal.fire({
-                        type: 'success',
-                        title: '<h3>Đặt hàng thành công</h3>',
-                        html: '<h4>Cảm ơn bạn đã đặt hàng. <br/> Chúng tôi sẽ liên hệ với bạn trong thời gian sớm nhất.</h4>',
-                        showConfirmButton: false,
-                        timer: 5000
-                    })
-                    //setTimeout(function () {
-                    //    $('#cartContent').html('Cảm ơn bạn đã đặt hàng thành công. Chúng tôi sẽ liên hệ sớm nhất.');
-                    //}, 2000);
-
+                    if (response.urlCheckout != undefined && response.urlCheckout != '') {
+                        window.location.href = response.urlCheckout;
+                    }
+                    else {
+                        console.log('create order ok');
+                        $('#divCheckout').hide(500);
+                        cart.deleteAll();
+                        Swal.fire({
+                            type: 'success',
+                            title: '<h3>Đặt hàng thành công</h3>',
+                            html: 'Cảm ơn bạn đã đặt hàng.<br/>Chúng tôi sẽ liên hệ với bạn trong thời gian sớm nhất.'
+                        })
+                    }
+                }
+                else
+                {
+                    $('#divMessage').show(500);
+                    $('#divMessage').text(response.message);
+                    setTimeout(function () {
+                        $('#divMessage').hide();
+                    }, 3000);
                 }
             }
         });

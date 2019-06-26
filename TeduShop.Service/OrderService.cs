@@ -9,7 +9,8 @@ namespace TeduShop.Service
 {
     public interface IOrderService
     {
-        bool Create(Order order, List<OrderDetail> orderDetails);
+        Order Create(Order order, List<OrderDetail> orderDetails);
+        void UpdateStatus(int orderId);
         void Save();
     }
 
@@ -26,7 +27,7 @@ namespace TeduShop.Service
             this._unitOfWork = unitOfWork;
         }
 
-        public bool Create(Order order, List<OrderDetail> orderDetails)
+        public Order Create(Order order, List<OrderDetail> orderDetails)
         {
             try
             {
@@ -39,11 +40,11 @@ namespace TeduShop.Service
                 }
 
                 Save();
-                return true;
+                return order;
             }
             catch (Exception ex)
             {
-                return false;
+                throw new Exception();
                 //do something else
             }
         }
@@ -51,6 +52,13 @@ namespace TeduShop.Service
         public void Save()
         {
             _unitOfWork.Commit();
+        }
+
+        public void UpdateStatus(int orderId)
+        {
+            var order = _orderRepository.GetSingleById(orderId);
+            order.Status = true;
+            //_orderRepository.Update(order);
         }
     }
 }

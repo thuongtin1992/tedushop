@@ -11,6 +11,7 @@ using TeduShop.Model.Models;
 using TeduShop.Service;
 using TeduShop.Web.App_Start;
 using TeduShop.Web.Infrastructure.Extensions;
+using TeduShop.Web.Infrastructure.NganLuongAPI;
 using TeduShop.Web.Models;
 
 namespace TeduShop.Web.Controllers
@@ -20,6 +21,10 @@ namespace TeduShop.Web.Controllers
         IProductService _productService;
         IOrderService _orderService;
         private ApplicationUserManager _userManager;
+
+        private string merchantId = ConfigHelper.GetByKey("MerchantId");
+        private string merchantPassword = ConfigHelper.GetByKey("MerchantPassword");
+        private string merchantEmail = ConfigHelper.GetByKey("MerchantEmail");
 
         public ShoppingCartController(IProductService productService, IOrderService orderService, ApplicationUserManager userManager)
         {
@@ -32,6 +37,36 @@ namespace TeduShop.Web.Controllers
         {
             if (Session[CommonConstants.SessionCart] == null)
                 Session[CommonConstants.SessionCart] = new List<ShoppingCartViewModel>();
+            return View();
+        }
+
+        public ActionResult ConfirmOrder()
+        {
+            string token = Request["token"];
+            RequestCheckOrder info = new RequestCheckOrder();
+            info.Merchant_id = merchantId;
+            info.Merchant_password = merchantPassword;
+            info.Token = token;
+            APICheckoutV3 objNLChecout = new APICheckoutV3();
+            ResponseCheckOrder result = objNLChecout.GetTransactionDetail(info);
+            if (result.errorCode == "00")
+            {
+                //update status order
+                _orderService.UpdateStatus(int.Parse(result.order_code));
+                _orderService.Save();
+                ViewBag.IsSuccess = true;
+                ViewBag.Result = "Thanh toán thành công. Chúng tôi sẽ liên hệ lại sớm nhất.";
+            }
+            else
+            {
+                ViewBag.IsSuccess = true;
+                ViewBag.Result = "Có lỗi xảy ra. Vui lòng liên hệ admin.";
+            }
+            return View();
+        }
+
+        public ActionResult CancelOrder()
+        {
             return View();
         }
 
@@ -189,7 +224,7 @@ namespace TeduShop.Web.Controllers
             orderNew.CustomerEmail = order.CustomerEmail;
             orderNew.CustomerMessage = order.CustomerMessage;
             orderNew.CreatedDate = DateTime.Now;
-            orderNew.PaymentMethod = "Tiền mặt";
+            orderNew.PaymentMethod = order.PaymentMethod;
             orderNew.PaymentStatus = "Chưa hoàn tất";
             orderNew.CreatedBy = order.CustomerName;
 
@@ -217,13 +252,60 @@ namespace TeduShop.Web.Controllers
 
             if (isEnough)
             {
-                _orderService.Create(orderNew, orderDetails);
+                var orderReturn = _orderService.Create(orderNew, orderDetails);
                 _productService.Save();
 
-                return Json(new
+                if (order.PaymentMethod == "CASH")
                 {
-                    status = true
-                });
+                    return Json(new
+                    {
+                        status = true
+                    });
+                }
+                else
+                {
+                    var currentLink = ConfigHelper.GetByKey("CurrentLink");
+                    RequestInfo info = new RequestInfo();
+                    info.Merchant_id = merchantId;
+                    info.Merchant_password = merchantPassword;
+                    info.Receiver_email = merchantEmail;
+
+                    info.cur_code = "vnd";
+                    info.bank_code = order.BankCode;
+
+                    info.Order_code = orderReturn.ID.ToString();
+                    info.Total_amount = orderDetails.Sum(x => x.Quantity * x.Price).ToString();
+                    info.fee_shipping = "0";
+                    info.Discount_amount = "0";
+                    info.order_description = "Thanh toán đơn hàng tại TeduShop";
+                    info.return_url = currentLink + "xac-nhan-don-hang.html";
+                    info.cancel_url = currentLink + "huy-don-hang.html";
+
+                    info.Buyer_fullname = order.CustomerName;
+                    info.Buyer_email = order.CustomerEmail;
+                    info.Buyer_mobile = order.CustomerMobile;
+
+                    APICheckoutV3 objNLChecout = new APICheckoutV3();
+                    ResponseInfo result = objNLChecout.GetUrlCheckout(info, order.PaymentMethod);
+
+                    if (result.Error_code == "00")
+                    {
+                        return Json(new
+                        {
+                            status = true,
+                            urlCheckout = result.Checkout_url,
+                            message = result.Description
+                        });
+                    }
+                    else
+                    {
+                        return Json(new
+                        {
+                            status = false,
+                            message = result.Description
+                        });
+                    }  
+                }
             }
             else
             {

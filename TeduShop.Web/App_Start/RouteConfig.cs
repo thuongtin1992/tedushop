@@ -19,6 +19,20 @@ namespace TeduShop.Web
             );
 
             routes.MapRoute(
+               name: "Confirm Order",
+               url: "xac-nhan-don-hang.html",
+               defaults: new { controller = "ShoppingCart", action = "ConfirmOrder" },
+               namespaces: new string[] { "TeduShop.Web.Controllers" }
+              );
+
+            routes.MapRoute(
+               name: "Cancel Order",
+               url: "huy-don-hang.html",
+               defaults: new { controller = "ShoppingCart", action = "CancelOrder" },
+               namespaces: new string[] { "TeduShop.Web.Controllers" }
+              );
+
+            routes.MapRoute(
                 name: "Contact",
                 url: "lien-he.html",
                 defaults: new { controller = "Contact", action = "Index" },

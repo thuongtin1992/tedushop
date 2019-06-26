@@ -80,13 +80,17 @@ namespace TeduShop.Web.Api
         [HttpGet]
         public HttpResponseMessage GetAll(HttpRequestMessage request)
         {
-            return CreateHttpResponse(request, () =>
+            Func<HttpResponseMessage> func = () =>
             {
                 var model = _productService.GetAll();
+
                 var responseData = Mapper.Map<IEnumerable<Product>, IEnumerable<ProductViewModel>>(model);
+
                 var response = request.CreateResponse(HttpStatusCode.OK, responseData);
                 return response;
-            });
+            };
+
+            return CreateHttpResponse(request, func);
         }
 
         [Route("create")]
