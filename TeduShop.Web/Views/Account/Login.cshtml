@@ -44,6 +44,9 @@
             <input type="submit" value="Đăng nhập">
             <p><a class="forgot" href="/reset-password.html">Quên mật khẩu?</a></p>
         }
+
+        @Html.Partial("_ExternalLoginsListPartial", new ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })
+
     </div>
     <div class="login-left">
         <h3>Bạn chưa có tài khoản?</h3>
